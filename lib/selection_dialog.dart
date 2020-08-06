@@ -61,10 +61,13 @@ class _SelectionDialogState extends State<SelectionDialog> {
             if (!widget.hideSearch)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: TextField(
-                  style: widget.searchStyle,
-                  decoration: widget.searchDecoration,
-                  onChanged: _filterElements,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: TextField(
+                    style: widget.searchStyle,
+                    decoration: widget.searchDecoration,
+                    onChanged: _filterElements,
+                  ),
                 ),
               ),
           ],
@@ -116,7 +119,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
       child: Flex(
         direction: Axis.horizontal,
         children: <Widget>[
-          if (widget.showFlag)
+          if (widget.showFlag) ...[
             Flexible(
               child: Padding(
                 padding: const EdgeInsets.only(right: 16.0),
@@ -127,14 +130,19 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 ),
               ),
             ),
+            const SizedBox(width: 4),
+          ],
           Expanded(
             flex: 4,
-            child: Text(
-              widget.showCountryOnly
-                  ? e.toCountryStringOnly()
-                  : e.toLongString(),
-              overflow: TextOverflow.fade,
-              style: widget.textStyle,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Text(
+                widget.showCountryOnly
+                    ? e.toCountryStringOnly()
+                    : e.toLongString(),
+                overflow: TextOverflow.fade,
+                style: widget.textStyle,
+              ),
             ),
           ),
         ],
