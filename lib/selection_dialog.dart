@@ -43,6 +43,8 @@ class _SelectionDialogState extends State<SelectionDialog> {
   /// this is useful for filtering purpose
   List<CountryCode> filteredElements;
 
+  bool get isHebrew => Localizations.localeOf(context).languageCode == 'he';
+
   @override
   Widget build(BuildContext context) => SimpleDialog(
         titlePadding: const EdgeInsets.all(0),
@@ -64,12 +66,14 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
-                    textAlign:
-                        Localizations.localeOf(context).languageCode == 'he'
-                            ? TextAlign.end
-                            : null,
+                    textAlign: isHebrew ? TextAlign.end : null,
                     style: widget.searchStyle,
-                    decoration: widget.searchDecoration,
+                    decoration: isHebrew
+                        ? widget.searchDecoration.copyWith(
+                            prefixIcon: Container(),
+                            suffixIcon: Icon(Icons.search),
+                          )
+                        : widget.searchDecoration,
                     onChanged: _filterElements,
                   ),
                 ),
@@ -143,10 +147,10 @@ class _SelectionDialogState extends State<SelectionDialog> {
               child: Text(
                 widget.showCountryOnly
                     ? e.toCountryStringOnly()
-                    : e.toLongString(),
-                textAlign: Localizations.localeOf(context).languageCode == 'he'
-                    ? TextAlign.end
-                    : null,
+                    : isHebrew
+                        ? e.toLongString().split(' ').reversed.join(' ')
+                        : e.toLongString(),
+                textAlign: isHebrew ? TextAlign.end : null,
                 overflow: TextOverflow.fade,
                 style: widget.textStyle,
               ),
