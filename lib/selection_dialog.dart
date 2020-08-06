@@ -64,6 +64,10 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
+                    textAlign:
+                        Localizations.localeOf(context).languageCode == 'he'
+                            ? TextAlign.end
+                            : null,
                     style: widget.searchStyle,
                     decoration: widget.searchDecoration,
                     onChanged: _filterElements,
@@ -140,6 +144,9 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 widget.showCountryOnly
                     ? e.toCountryStringOnly()
                     : e.toLongString(),
+                textAlign: Localizations.localeOf(context).languageCode == 'he'
+                    ? TextAlign.end
+                    : null,
                 overflow: TextOverflow.fade,
                 style: widget.textStyle,
               ),
