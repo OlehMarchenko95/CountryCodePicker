@@ -67,13 +67,11 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   textDirection: TextDirection.ltr,
                   child: TextField(
                     textAlign: isHebrew ? TextAlign.end : TextAlign.start,
+                    decoration: widget.searchDecoration.copyWith(
+                      prefixIcon: SizedBox.shrink(),
+                      suffixIcon: Icon(Icons.search),
+                    ),
                     style: widget.searchStyle,
-                    decoration: isHebrew
-                        ? widget.searchDecoration.copyWith(
-                            prefixIcon: Container(),
-                            suffixIcon: Icon(Icons.search),
-                          )
-                        : widget.searchDecoration,
                     onChanged: _filterElements,
                   ),
                 ),
