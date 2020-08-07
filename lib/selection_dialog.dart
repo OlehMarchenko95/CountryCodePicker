@@ -66,7 +66,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
-                    // textAlign: isHebrew ? TextAlign.end : TextAlign.start,
+                    textAlign: isHebrew ? TextAlign.end : TextAlign.start,
                     style: widget.searchStyle,
                     decoration: isHebrew
                         ? widget.searchDecoration.copyWith(
