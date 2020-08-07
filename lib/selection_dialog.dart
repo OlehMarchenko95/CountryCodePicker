@@ -66,7 +66,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
-                    textAlign: isHebrew ? TextAlign.end : null,
+                    // textAlign: isHebrew ? TextAlign.end : TextAlign.start,
                     style: widget.searchStyle,
                     decoration: isHebrew
                         ? widget.searchDecoration.copyWith(
@@ -125,7 +125,9 @@ class _SelectionDialogState extends State<SelectionDialog> {
     if (isHebrew) {
       final parts = e.toLongString().split(' ');
 
-      final fPart = parts[0].contains('+') ? parts[0].replaceAll('+', '') : parts[1].replaceAll('+', '');
+      final fPart = parts[0].contains('+')
+          ? parts[0].replaceAll('+', '')
+          : parts[1].replaceAll('+', '');
       final sPart = parts[0].contains('+') ? parts[1] : parts[0];
 
       return '$sPart +$fPart';
@@ -155,15 +157,19 @@ class _SelectionDialogState extends State<SelectionDialog> {
           ],
           Expanded(
             flex: 4,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: Text(
-                widget.showCountryOnly
-                    ? e.toCountryStringOnly()
-                    : _hebrewAwareOptionName(e),
-                textAlign: isHebrew ? TextAlign.end : null,
-                overflow: TextOverflow.fade,
-                style: widget.textStyle,
+            child: Localizations.override(
+              context: context,
+              locale: Locale('en'),
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Text(
+                  widget.showCountryOnly
+                      ? e.toCountryStringOnly()
+                      : _hebrewAwareOptionName(e),
+                  textAlign: isHebrew ? TextAlign.end : null,
+                  overflow: TextOverflow.fade,
+                  style: widget.textStyle,
+                ),
               ),
             ),
           ),

@@ -15,12 +15,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       supportedLocales: [
-        Locale('en'),
-        Locale('it'),
-        Locale('fr'),
-        Locale('es'),
-        Locale('de'),
-        Locale('pt'),
+        Locale('he'),
+        // Locale('it'),
+        // Locale('fr'),
+        // Locale('es'),
+        // Locale('de'),
+        // Locale('pt'),
       ],
       localizationsDelegates: [
         CountryLocalizations.delegate,
@@ -38,11 +38,12 @@ class _MyAppState extends State<MyApp> {
               CountryCodePicker(
                 onChanged: print,
                 // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                initialSelection: 'IT',
-                favorite: ['+39', 'FR'],
-                countryFilter: ['IT', 'FR'],
-                showFlagDialog: false,
+                initialSelection: 'EG',
+                countryFilter: ['EG', 'IT', 'FR'],
                 comparator: (a, b) => b.name.compareTo(a.name),
+                searchStyle: TextStyle(
+                  color: Colors.black,
+                ),
                 //Get the country information relevant to the initial selection
                 onInit: (code) =>
                     print("on init ${code.name} ${code.dialCode} ${code.name}"),
