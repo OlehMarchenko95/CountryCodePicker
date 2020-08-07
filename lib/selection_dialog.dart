@@ -121,6 +121,19 @@ class _SelectionDialogState extends State<SelectionDialog> {
         ],
       );
 
+  String _hebrewAwareOptionName(CountryCode e) {
+    if (isHebrew) {
+      final parts = e.toLongString().split(' ');
+
+      final fPart = parts[0].contains('+') ? parts[0].replaceAll('+', '') : parts[1].replaceAll('+', '');
+      final sPart = parts[0].contains('+') ? parts[1] : parts[0];
+
+      return '$sPart +$fPart';
+    } else {
+      return e.toLongString();
+    }
+  }
+
   Widget _buildOption(CountryCode e) {
     return Container(
       width: 400,
@@ -147,9 +160,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
               child: Text(
                 widget.showCountryOnly
                     ? e.toCountryStringOnly()
-                    : isHebrew
-                        ? e.toLongString().split(' ').reversed.join(' ')
-                        : e.toLongString(),
+                    : _hebrewAwareOptionName(e),
                 textAlign: isHebrew ? TextAlign.end : null,
                 overflow: TextOverflow.fade,
                 style: widget.textStyle,
