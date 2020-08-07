@@ -51,6 +51,7 @@ class _CountryLocalizationsDelegate
       'es',
       'de',
       'pt',
+      'he',
     ].contains(locale.languageCode);
   }
 

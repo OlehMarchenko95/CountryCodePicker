@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
                 onChanged: print,
                 // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                 initialSelection: 'EG',
-                countryFilter: ['EG', 'IT', 'FR'],
                 comparator: (a, b) => b.name.compareTo(a.name),
                 searchStyle: TextStyle(
                   color: Colors.black,
